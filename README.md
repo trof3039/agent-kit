@@ -41,6 +41,8 @@ Initialization explains the storage model before asking the first question:
 - `AGENTS.md` contains durable operating instructions.
 - `docs/agents/workspace.md` maps responsibilities, repositories, sources of
   truth, recurring workflows, and non-secret integration facts.
+- `docs/agents/credentials.md` records the non-secret GCP Secret Manager,
+  naming, browser-opening, local-materialization, and recovery policy.
 - `CONTEXT.md` is created lazily and contains only canonical domain language.
 - `docs/adr/` is created lazily for consequential, surprising, hard-to-reverse
   decisions that involved a real trade-off.

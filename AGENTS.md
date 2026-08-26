@@ -64,9 +64,14 @@ workflow records actual workspace facts.
 
 - Before any password, token, API key, SSH key, provider login, or secret-store
   work, read and follow `.agents/skills/credentials/SKILL.md`.
+- After initialization, read `docs/agents/credentials.md` for the workspace's
+  non-secret GCP project, naming, materialization, browser, and recovery policy.
 - Secret values belong only in a provider UI, hidden terminal prompt, or
   approved secret store. Never place them in chat, command arguments, logs,
   screenshots, tracked files, or non-secret inventories.
+- Google Secret Manager is the default durable store for exportable machine
+  secrets. Local `.env`, Keychain, CLI, SSH, mounted, and CI copies are
+  operational materializations unless a recorded exception says otherwise.
 
 ## Workspace profile
 

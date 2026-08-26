@@ -5,13 +5,16 @@ description: Manage, retrieve, save, rotate, recover, audit, or provision creden
 
 # Credentials
 
-Keep credential material in its approved store and make human setup resumable.
+Keep exportable machine credentials durably recoverable in Google Secret
+Manager, materialize only the local copies their consumers need, and make human
+setup resumable.
 
 ## Route the work
 
-1. Read the repository's credential policy and existing tooling before acting.
-   Repository-specific ownership, stores, schemas, and authorization boundaries
-   override these personal defaults.
+1. Read `docs/agents/credentials.md` when it exists, then read the repository's
+   narrower credential policy and existing tooling. Repository-specific
+   ownership, schemas, and authorization boundaries override workspace
+   defaults, but an exception to the durable-store policy must state why.
 2. For listing, retrieving, saving, changing, rotating, or auditing credentials,
    read [storage and operations](references/storage-and-operations.md).
 3. When a human must obtain, recover, or enter credentials, especially across
@@ -22,13 +25,23 @@ Keep credential material in its approved store and make human setup resumable.
 
 ## Invariants
 
+- Google Secret Manager is the durable store for every exportable non-human
+  secret by default. Local `.env` files, Keychain items, provider CLI configs,
+  and SSH files are operational copies, not the only recoverable copy.
+- Human passwords, MFA recovery, payment authority, and broad account recovery
+  remain in the human-controlled password manager. Never integrate with it or
+  copy those values into Secret Manager.
 - Secret entry happens in a provider UI or hidden terminal prompt. Keep values
   out of chat, tool output, shell history, command arguments, logs, screenshots,
   tracked files, and non-secret inventories.
-- Print login and provider URLs for the user to open in the correct browser
-  profile. Leave the browser and clipboard under the user's control.
+- Follow the workspace's browser-opening policy. Always show the URL and
+  expected account first; open it automatically only when the workspace
+  explicitly permits that and the account/profile is unambiguous.
 - Keep one canonical owner, identifier, and store for each credential. Treat a
-  provider CLI config as an operational copy, not an accidental second policy.
+  local materialization as an operational copy, not an accidental second
+  policy.
+- Back up an exportable SSH private key to its designated Secret Manager secret
+  before production access depends on that key as the only working path.
 - List and report names, locations, versions, timestamps, scopes, and validation
   state without reading or printing payloads.
 - Validate a new or recovered credential immediately through the narrowest real

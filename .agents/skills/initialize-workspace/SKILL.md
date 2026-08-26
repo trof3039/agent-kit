@@ -23,8 +23,9 @@ Before acting:
    and `wizard` only for steps the agent genuinely cannot perform.
 
 For credential work, the `credentials` policy overrides the wizard's generic
-defaults. In particular, a credential wizard must print provider URLs for
-manual opening and must not call an automatic URL opener.
+defaults. Follow the browser-opening mode recorded in
+`docs/agents/credentials.md`: always display the URL and expected account;
+automatically open it only when the workspace chose `automatic`.
 
 Treat full local agent capability as the baseline. Do not ask whether the
 operator is technical, whether the agent may write code, or whether it may use
@@ -58,6 +59,8 @@ may write:
 - tracker mechanics go in `docs/agents/issue-tracker.md`, label mappings in
   `docs/agents/triage-labels.md`, and domain layout in
   `docs/agents/domain.md`;
+- non-secret credential storage, naming, browser, and recovery policy goes in
+  `docs/agents/credentials.md`;
 - specs and tickets go to the configured tracker;
 - secret values are never written to any of these places.
 
@@ -153,13 +156,27 @@ might be useful someday.
 ### Integrations and credentials
 
 Determine which integrations are actually needed only after workflows and
-sources of truth are known. Record safe metadata and access routes, never
-secret payloads. For each required credential, keep secret entry in the
-provider UI or a hidden terminal prompt, validate access immediately with the
-narrowest real probe, and record only the safe validation result.
+sources of truth are known. Create `docs/agents/credentials.md` from
+`../credentials/references/credential-config.md`. Inspect safe `gcloud`
+configuration and Secret Manager metadata to propose the project, operator
+account, existing name families, and materializations; never read payloads.
 
-Print provider URLs for the user to open manually in the correct browser
-profile. Do not open them automatically.
+Google Secret Manager is the recommended durable store for every exportable
+machine secret. Human passwords, MFA recovery, payment authority, and broad
+account recovery stay solely in the human-controlled password manager. Local
+`.env`, Keychain, CLI, SSH, mounted, and CI copies are materializations rather
+than competing durable stores.
+
+Choose browser-opening mode from actual operator reality. When one default
+profile/account is unambiguous, recommend `automatic`; when several profiles or
+accounts exist, recommend `manual`. In either mode, show the exact URL and
+expected account before navigation.
+
+For each required credential, keep secret entry in the provider UI or a hidden
+terminal prompt, save exportable machine material durably, validate access
+immediately with the narrowest real probe, and record only the safe validation
+result. An SSH private key must have its designated Secret Manager backup before
+it becomes the sole production access path.
 
 ### Communication conventions
 
@@ -196,15 +213,18 @@ Initialization is complete only when:
 1. `docs/agents/workspace.md` accurately maps the working environment.
 2. Issue-tracker, triage-label, and domain-layout configuration exists for the
    installed engineering skills.
-3. Every nested repository has an exact parent `.gitignore` entry and its own
+3. `docs/agents/credentials.md` records the GCP project, safe operator metadata,
+   browser mode, deterministic naming, local materializations, and explicit
+   exceptions without any secret values.
+4. Every nested repository has an exact parent `.gitignore` entry and its own
    instructions have been respected.
-4. Required integrations are either validated or listed as explicit safe
+5. Required integrations are either validated or listed as explicit safe
    blockers; no secret appears in Git or chat.
-5. The root `AGENTS.md` has one non-duplicated instruction path for every
+6. The root `AGENTS.md` has one non-duplicated instruction path for every
    durable rule and its Workspace profile status is `initialized`.
-6. A final scan finds no contradictory instructions, duplicated ownership, or
+7. A final scan finds no contradictory instructions, duplicated ownership, or
    invented empty artifact directories.
-7. The user confirms the final workspace summary and diff.
+8. The user confirms the final workspace summary and diff.
 
 After confirmation, commit the initialization on the current branch with a
 descriptive message. Do not push, open a pull request, or merge unless the user
