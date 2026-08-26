@@ -44,6 +44,10 @@ If a human explicitly needs a value, provide a command for them to run outside
 agent tooling. Automation reads inside a narrow wrapper, passes the value
 directly to the consumer, suppresses tracing, and clears it afterward.
 
+For a non-destructive GCP-to-GCP copy, use
+[`copy-gcp-secrets`](../scripts/copy-gcp-secrets). It resolves the target from
+the personal vault config, compares payload bytes, and never revokes the source.
+
 ## Recover or rotate
 
 Restore the canonical payload to its expected materialization, apply its mode,
