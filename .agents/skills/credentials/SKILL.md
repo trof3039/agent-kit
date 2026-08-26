@@ -30,7 +30,12 @@ Keep exportable machine authority recoverable without exposing its values.
   screenshots, tracked files, and non-secret inventories.
 - Give each credential one owner, stable name, and canonical project. Use
   versions for changes; use separate projects when reader boundaries differ.
-- Inspect and report metadata only. Validate authority with the narrowest real
-  probe and report safe status.
+- Credential validation is single-source: inject exactly the declared
+  credential into a clean client with every ambient identity, profile, agent,
+  config, cache, and interactive authentication path disabled. A route or
+  endpoint health check does not validate a credential and cannot authorize a
+  switch, revocation, disablement, or deletion.
+- Inspect and report metadata only. Validate authority with the narrowest
+  single-source real probe and report safe status.
 - Validate replacement access before revocation. Disablement, destruction, and
   deletion are separate explicit acts.

@@ -41,8 +41,10 @@ one canonical project.
   file at the provider's canonical path with mode `0600`.
 - Before an SSH private key becomes the only working production path, back it
   up as `operator-ssh-<identity-label>`. Keep the local private/public pair at
-  `0600`/`0644`, register only the public key, and validate a fresh batch-mode
-  connection.
+  `0600`/`0644` and register only the public key. Validate it with
+  [`validate-ssh-credential`](../scripts/validate-ssh-credential), passing the
+  private-key path plus the literal user and host; an SSH alias is a route
+  check, not identity proof.
 - Treat a machine record's `provider` as inventory metadata, not evidence of a
   provider API credential or management authority. Validate and record that
   authority separately before proposing provider-console operations.
@@ -60,7 +62,7 @@ the personal vault config, compares payload bytes, and never revokes the source.
 ## Recover or rotate
 
 Restore the canonical payload to its expected materialization, apply its mode,
-then validate the real consumer. For rotation, add and validate the new version
-or key, switch consumers, and only then perform the separately authorized
-disablement or revocation. A disclosed credential requires provider rotation,
-not relocation alone.
+then validate the real consumer with only that payload available. For rotation,
+add and validate the new version or key in a fresh client, switch consumers,
+and only then perform the separately authorized disablement or revocation. A
+disclosed credential requires provider rotation, not relocation alone.
