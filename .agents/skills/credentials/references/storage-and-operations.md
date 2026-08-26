@@ -36,9 +36,12 @@ one canonical project.
 - Back up the smallest complete exportable provider config, then keep its live
   file at the provider's canonical path with mode `0600`.
 - Before an SSH private key becomes the only working production path, back it
-  up as `operator-ssh-<target-alias>`. Keep the local private/public pair at
+  up as `operator-ssh-<identity-label>`. Keep the local private/public pair at
   `0600`/`0644`, register only the public key, and validate a fresh batch-mode
   connection.
+- Treat a machine record's `provider` as inventory metadata, not evidence of a
+  provider API credential or management authority. Validate and record that
+  authority separately before proposing provider-console operations.
 - Keep local runtime files gitignored and limited to the consumer's fields.
   Recreate materializations when the durable version changes.
 

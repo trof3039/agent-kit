@@ -21,7 +21,7 @@ resolved setup items.
 - Provider profile: `provider-<provider>-<profile>`
 - Repository runtime: `runtime-<repo>-<environment>`
 - External service: `service-<name>-<purpose>`
-- SSH private key: `operator-ssh-<target-alias>`
+- SSH private key: `operator-ssh-<identity-label>`
 - Machine record: `machine-<alias>`
 
 Names identify stable authority or inventory identity. Changes use Secret
@@ -33,8 +33,11 @@ or `v2` never enter a stable name.
 Machine inventory shares the credential project as strict JSON addressed by
 `machine-<alias>`. The base fields are `alias`, `provider`, `serviceName`,
 `ipv4`, `sshUsername`, and `role`; the address suffix must equal `alias`.
-Repository-owned schemas may add validated fields. The target-specific SSH key
-is `operator-ssh-<alias>`.
+Repository-owned schemas may add validated fields. `provider` identifies the
+host supplier; it does not prove that a provider API profile exists. The
+validated SSH route explicitly selects an operator identity and never infers a
+target-specific key from the machine alias. A workspace may share one operator
+identity across machines or require target-specific identities.
 
 ## Browser opening
 
