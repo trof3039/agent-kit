@@ -31,13 +31,19 @@ special-purpose, unstable, or non-functional.
 
 1. Clone this repository onto the target Mac.
 2. Open this folder as a local project in ChatGPT Desktop and trust the project.
-3. Start a fresh task and invoke `$setup-matt-pocock-skills` to configure the
+3. From a local terminal, create the personal credential vault:
+
+   ```bash
+   .agents/skills/credentials/scripts/setup-personal-gcp
+   ```
+
+4. Start a fresh task and invoke `$setup-matt-pocock-skills` to configure the
    tracker, triage labels, and domain-document layout.
-4. In the same task, invoke `$initialize-workspace`.
-5. Work through the grilling rounds. The agent will inspect repositories,
+5. In the same task, invoke `$initialize-workspace`.
+6. Work through the grilling rounds. The agent will inspect repositories,
    systems, and existing team-provided skills itself; ask only for actual
    decisions; and write settled context as the conversation progresses.
-6. Review the final diff and let the agent commit the initialized workspace.
+7. Review the final diff and let the agent commit the initialized workspace.
 
 Initialization explains the storage model before asking the first question:
 

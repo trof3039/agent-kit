@@ -4,6 +4,10 @@ Use one task-specific command under `~/.local/bin` when a human flow has several
 providers, browser steps, account choices, or resumable stages. A single value
 normally needs one command with a hidden prompt, not a multi-stage wizard.
 
+For a standalone personal GCP vault, run
+[`setup-personal-gcp`](../scripts/setup-personal-gcp); generate a task-specific
+wizard only when that contract does not fit.
+
 Read `docs/agents/credentials.md` for the project, identity, names, browser mode,
 and expected account. Then make the command:
 
