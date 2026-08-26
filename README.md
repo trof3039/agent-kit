@@ -37,6 +37,9 @@ special-purpose, unstable, or non-functional.
    .agents/skills/credentials/scripts/setup-personal-gcp
    ```
 
+   Run the same command once on every machine. The first run creates the vault;
+   later machines discover it and save only their local routing metadata.
+
 4. Start a fresh task and invoke `$setup-matt-pocock-skills` to configure the
    tracker, triage labels, and domain-document layout.
 5. In the same task, invoke `$initialize-workspace`.
