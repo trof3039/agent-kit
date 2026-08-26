@@ -1,4 +1,4 @@
-# Agent Workspace Kit
+# Agent Kit
 
 This repository is a portable control workspace for doing real work with an
 agent across one or more independent Git repositories. It is not a reduced
@@ -17,9 +17,11 @@ instructions.
 - The complete stable engineering and productivity skill set from
   [Matt Pocock's skills](https://github.com/mattpocock/skills), vendored at a
   known upstream commit.
-- A separate `credentials` skill for safe, resumable authentication setup.
-- An `initialize-workspace` skill that adds operator, repository, workflow, and
-  credential context after Matt's setup configures the engineering skills.
+- A `credentials` skill that makes safe, resumable authentication a required
+  part of workspace initialization and later credential work.
+- An `initialize-workspace` skill that adds operator, repository, workflow,
+  existing-instruction, and credential context after Matt's setup configures
+  the engineering skills.
 
 The upstream `in-progress`, `misc`, and deprecated skills are intentionally not
 included. They are not part of Matt's published stable set and may be
@@ -32,9 +34,9 @@ special-purpose, unstable, or non-functional.
 3. Start a fresh task and invoke `$setup-matt-pocock-skills` to configure the
    tracker, triage labels, and domain-document layout.
 4. In the same task, invoke `$initialize-workspace`.
-5. Work through the grilling rounds. The agent will inspect facts itself, ask
-   only for actual decisions, and write settled context as the conversation
-   progresses.
+5. Work through the grilling rounds. The agent will inspect repositories,
+   systems, and existing team-provided skills itself; ask only for actual
+   decisions; and write settled context as the conversation progresses.
 6. Review the final diff and let the agent commit the initialized workspace.
 
 Initialization explains the storage model before asking the first question:
@@ -75,7 +77,9 @@ main flow begins.
 A human-facing requirements document and an agent-facing execution spec are
 different artifacts. A project-specific skill may create or edit the former;
 `to-spec` and `to-tickets` create the latter so agents can plan and execute the
-work. Initialization records how both fit together for the actual project.
+work. Initialization inspects existing project-specific skills, establishes
+whether they are current and authoritative, and records how both artifact types
+fit together for the actual project.
 
 ## Independent child repositories
 

@@ -32,6 +32,12 @@ do not leave placeholder headings in the completed profile.
 | --- | --- | --- | --- | --- |
 | <artifact> | <reader> | <tracker, repository, or system> | <skill or process> | <review/validation signal> |
 
+## Existing workflow instructions
+
+| Skill or instruction | Source and current owner | Scope and authority | Decision |
+| --- | --- | --- | --- |
+| <name or path> | <provenance and responsible owner, if any> | <where it applies and whether it is authoritative> | <adopt, adapt, replace, or blocked> |
+
 ## Recurring workflows
 
 ### <Workflow name>

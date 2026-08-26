@@ -19,7 +19,10 @@ again in the same task. Do not reproduce that skill's setup flow.
 
 Read the root instructions, Matt's generated `docs/agents/` configuration, and
 any partial initialization output. Inspect Git state, remotes, child
-repositories, source systems, integrations, and safe authentication metadata.
+repositories, source systems, integrations, safe authentication metadata, and
+existing repository-, team-, or user-provided workflow skills. Read available
+skills instead of asking the user to summarize them; record unavailable sources
+as blockers.
 
 Before the first question, explain where settled information will go:
 
@@ -52,17 +55,22 @@ Resolve only these workspace-specific branches:
    work.
 2. Repositories and external systems, including which source is authoritative
    for each subject and how conflicts are resolved.
-3. Artifact contracts: audience, canonical home, required format, review, and
+3. Existing workflow skills and instructions: provenance, current owner, scope,
+   authority, overlap, and conflicts. Decide whether each relevant artifact is
+   adopted, adapted, replaced, or left as a blocker.
+4. Artifact contracts: audience, canonical home, required format, review, and
    completion signal. Keep human-facing requirements separate from
    agent-execution specs and tickets.
-4. Recurring workflows from trigger through evidence, decision, artifact, Git
+5. Recurring workflows from trigger through evidence, decision, artifact, Git
    action, validation, and human handoff. Identify repeated operations that
    justify a script or skill without creating one outside the current scope.
-5. Repository-specific branch, commit, pull-request, merge, and worktree
+6. Repository-specific branch, commit, pull-request, merge, and worktree
    conventions.
-6. Required integrations and the non-secret credential configuration, using
-   the `credentials` skill.
-7. Language and communication conventions for each audience.
+7. Credential bootstrap and access for every required integration. Invoke
+   `credentials`; establish the human root of trust, durable machine-secret
+   store, local materializations, safe validation, browser mode, and recovery
+   route before declaring an integration ready.
+8. Language and communication conventions for each audience.
 
 ## Persist
 
@@ -88,6 +96,10 @@ Finish only when:
 
 - the workspace and credential profiles contain no secret values or unresolved
   decisions hidden as assumptions;
+- every relevant existing workflow skill is classified rather than silently
+  trusted;
+- the credential bootstrap is usable, and each required local materialization
+  has a durable source or an explicit recoverable exception;
 - child repositories and instruction ownership are unambiguous;
 - integrations are validated or listed as safe blockers;
 - instructions have no duplicate owners or contradictions;
