@@ -6,9 +6,9 @@ agent across one or more independent Git repositories. It is not a reduced
 APIs, tests, browsers, and external tools whenever the task calls for them.
 
 The template deliberately contains no assumptions about a person's role, a
-company, a tracker, a documentation system, or a particular project. A single
-guided initialization session discovers those facts and records them in their
-proper homes.
+company, a tracker, a documentation system, or a particular project. Two
+explicit setup steps in one task establish those facts without duplicating
+instructions.
 
 ## What is included
 
@@ -18,9 +18,8 @@ proper homes.
   [Matt Pocock's skills](https://github.com/mattpocock/skills), vendored at a
   known upstream commit.
 - A separate `credentials` skill for safe, resumable authentication setup.
-- An `initialize-workspace` skill that combines first-time discovery, grilling,
-  domain modeling, issue-tracker setup, repository mapping, and durable agent
-  instructions.
+- An `initialize-workspace` skill that adds operator, repository, workflow, and
+  credential context after Matt's setup configures the engineering skills.
 
 The upstream `in-progress`, `misc`, and deprecated skills are intentionally not
 included. They are not part of Matt's published stable set and may be
@@ -30,11 +29,13 @@ special-purpose, unstable, or non-functional.
 
 1. Clone this repository onto the target Mac.
 2. Open this folder as a local project in ChatGPT Desktop and trust the project.
-3. Start a fresh task and invoke `$initialize-workspace`.
-4. Work through the grilling rounds. The agent will inspect facts itself, ask
+3. Start a fresh task and invoke `$setup-matt-pocock-skills` to configure the
+   tracker, triage labels, and domain-document layout.
+4. In the same task, invoke `$initialize-workspace`.
+5. Work through the grilling rounds. The agent will inspect facts itself, ask
    only for actual decisions, and write settled context as the conversation
    progresses.
-5. Review the final diff and let the agent commit the initialized workspace.
+6. Review the final diff and let the agent commit the initialized workspace.
 
 Initialization explains the storage model before asking the first question:
 
@@ -50,9 +51,8 @@ Initialization explains the storage model before asking the first question:
   local backlog.
 - Secrets never enter this repository.
 
-If initialization is interrupted, invoke `$initialize-workspace` again. It
-resumes from settled files instead of restarting the interview or discarding
-progress.
+If either setup step is interrupted, invoke that skill again. Both resume from
+the files already written instead of discarding settled progress.
 
 ## Normal work
 

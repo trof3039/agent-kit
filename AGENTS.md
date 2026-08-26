@@ -6,8 +6,11 @@ workflow records actual workspace facts.
 
 ## First-time initialization
 
-- When the Workspace profile section says `not initialized`, run the
-  `$initialize-workspace` skill before the first substantive task.
+- Before `$initialize-workspace`, run `$setup-matt-pocock-skills` when its
+  `docs/agents/issue-tracker.md`, `domain.md`, or applicable `triage-labels.md`
+  output is missing.
+- When the Workspace profile says `not initialized`, run
+  `$initialize-workspace` before the first substantive task.
 - Resume partial initialization from the files already written. Do not restart
   the interview or discard settled decisions.
 - Do not invent a role, repository layout, tracker, source system, workflow, or
