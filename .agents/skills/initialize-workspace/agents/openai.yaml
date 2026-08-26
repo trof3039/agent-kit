@@ -1,0 +1,6 @@
+interface:
+  display_name: "Initialize Workspace"
+  short_description: "Personalize a portable agent workspace"
+  default_prompt: "Use $initialize-workspace to run the first guided setup session for this workspace."
+policy:
+  allow_implicit_invocation: false
