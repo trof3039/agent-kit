@@ -61,6 +61,12 @@ the personal vault config, compares payload bytes, and never revokes the source.
 
 ## Recover or rotate
 
+For an external machine without a separately validated provider or recovery
+route, SSH credential work is read-only: store and prove the granted identity.
+Rotation, exclusivity, revocation, and `authorized_keys` rewrites require the
+user's explicit target-specific authorization plus a working independent
+recovery route.
+
 Restore the canonical payload to its expected materialization, apply its mode,
 then validate the real consumer with only that payload available. For rotation,
 add and validate the new version or key in a fresh client, switch consumers,
