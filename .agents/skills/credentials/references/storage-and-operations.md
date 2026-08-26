@@ -33,6 +33,10 @@ one canonical project.
 - Put only safe routing metadata in names and labels. Store machine inventory
   as strict `machine-<alias>` records under the configured schema; refuse ad
   hoc `server-*` documents.
+- Use the real provider service identifier or `null`; never substitute the
+  machine alias for an unknown provider value. When ownership or access is
+  ambiguous, the schema explicitly records asset ownership, provider profile,
+  SSH identity, and the repository that owns runtime details.
 - Back up the smallest complete exportable provider config, then keep its live
   file at the provider's canonical path with mode `0600`.
 - Before an SSH private key becomes the only working production path, back it

@@ -33,11 +33,17 @@ or `v2` never enter a stable name.
 Machine inventory shares the credential project as strict JSON addressed by
 `machine-<alias>`. The base fields are `alias`, `provider`, `serviceName`,
 `ipv4`, `sshUsername`, and `role`; the address suffix must equal `alias`.
-Repository-owned schemas may add validated fields. `provider` identifies the
-host supplier; it does not prove that a provider API profile exists. The
-validated SSH route explicitly selects an operator identity and never infers a
-target-specific key from the machine alias. A workspace may share one operator
-identity across machines or require target-specific identities.
+`serviceName` is the actual provider-side identifier or `null`, never a copy of
+the alias used to fill an unknown value. Repository-owned schemas may add
+validated fields.
+
+When asset ownership or access can be ambiguous, record `ownership`
+(`personal`, `organization`, or `external`), `providerProfile`, `sshIdentity`,
+and `runtimeRepository`; the last three are a canonical resource/repository
+name or `null`. `provider` identifies the host supplier, while
+`providerProfile` alone records provider API authority. The SSH route uses the
+named identity. Runtime topology remains in `runtimeRepository` instead of
+being copied into the machine record.
 
 ## Browser opening
 
