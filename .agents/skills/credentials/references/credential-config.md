@@ -16,12 +16,25 @@ resolved setup items.
 - Replication: <policy>
 - Data Access audit logging: <enabled or open setup item>
 
-## Secret naming
+## Resource naming
 
-- Provider access: `provider-<name>`
+- Provider profile: `provider-<provider>-<profile>`
 - Repository runtime: `runtime-<repo>-<environment>`
 - External service: `service-<name>-<purpose>`
-- SSH private key: `operator-ssh-<device-label>`
+- SSH private key: `operator-ssh-<target-alias>`
+- Machine record: `machine-<alias>`
+
+Names identify stable authority or inventory identity. Changes use Secret
+Manager versions; lifecycle labels such as `legacy`, `old`, `new`, `current`,
+or `v2` never enter a stable name.
+
+## Machine records
+
+Machine inventory shares the credential project as strict JSON addressed by
+`machine-<alias>`. The base fields are `alias`, `provider`, `serviceName`,
+`ipv4`, `sshUsername`, and `role`; the address suffix must equal `alias`.
+Repository-owned schemas may add validated fields. The target-specific SSH key
+is `operator-ssh-<alias>`.
 
 ## Browser opening
 
@@ -46,5 +59,6 @@ resolved setup items.
 - <Safe blocker metadata only.>
 ```
 
-Store machine and server inventory in the workspace map. Never put a payload,
-recovery code, private key, token, password, or value-bearing command here.
+Record the machine schema and registry location here, but not instance values,
+payloads, recovery codes, private keys, tokens, passwords, or value-bearing
+commands.

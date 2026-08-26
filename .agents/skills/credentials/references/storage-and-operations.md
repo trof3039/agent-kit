@@ -9,7 +9,7 @@ policy; repository policy may narrow it further.
 | Layer | Contents |
 | --- | --- |
 | Human root | Password manager: passwords, MFA and recovery codes, payment and broad account authority, and the Google account that bootstraps `gcloud`. |
-| Durable machine store | Secret Manager: exportable tokens, API secrets, provider-config backups, runtime secrets, and recoverable SSH private keys. |
+| Durable machine store | Secret Manager: exportable tokens, API secrets, provider-config backups, runtime secrets, recoverable SSH private keys, and validated machine records. |
 | Materialization | The consumer's required `.env`, Keychain item, CLI config, SSH file, mount, or CI secret. |
 
 Bootstrap Secret Manager through the human Google account and a keyless,
@@ -30,13 +30,15 @@ one canonical project.
 
 - Create one Secret Manager resource per logical credential and add immutable
   versions. Send payloads through stdin or the smallest mode-`0600` source file.
-- Put only safe routing metadata in names and labels. Keep non-secret machine or
-  server inventory in workspace documentation, not Secret Manager.
+- Put only safe routing metadata in names and labels. Store machine inventory
+  as strict `machine-<alias>` records under the configured schema; refuse ad
+  hoc `server-*` documents.
 - Back up the smallest complete exportable provider config, then keep its live
   file at the provider's canonical path with mode `0600`.
 - Before an SSH private key becomes the only working production path, back it
-  up under its device label. Keep the local private/public pair at `0600`/`0644`,
-  register only the public key, and validate a fresh batch-mode connection.
+  up as `operator-ssh-<target-alias>`. Keep the local private/public pair at
+  `0600`/`0644`, register only the public key, and validate a fresh batch-mode
+  connection.
 - Keep local runtime files gitignored and limited to the consumer's fields.
   Recreate materializations when the durable version changes.
 
