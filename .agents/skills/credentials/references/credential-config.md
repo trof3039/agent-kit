@@ -1,8 +1,8 @@
 # Credential configuration format
 
-Create `docs/agents/credentials.md` during workspace initialization using this
-format. It contains only non-secret policy and safe metadata. Omit unused
-sections and remove resolved setup items.
+Create `docs/agents/credentials.md` during workspace initialization from the
+applicable sections below. It contains policy and safe metadata only. Remove
+resolved setup items.
 
 ```markdown
 # Credential configuration
@@ -10,43 +10,41 @@ sections and remove resolved setup items.
 ## Durable store
 
 - Provider: Google Secret Manager
-- Project ID: <non-secret GCP project id>
-- Operator account: <expected non-secret Google account>
-- Replication: <automatic or named policy>
+- Project ID: <project id>
+- Bootstrap account: <Google account>
+- Keyless operator: <principal>
+- Replication: <policy>
+- Data Access audit logging: <enabled or open setup item>
 
 ## Secret naming
 
 - Provider access: `provider-<name>`
 - Repository runtime: `runtime-<repo>-<environment>`
-- Server access: `server-<name>`
-- SSH private key: `operator-ssh-<label>`
+- External service: `service-<name>-<purpose>`
+- SSH private key: `operator-ssh-<device-label>`
 
 ## Browser opening
 
 - Mode: `<automatic|manual>`
-- Expected browser/profile: <safe profile label or "single default profile">
-
-`automatic` means a wizard displays the URL and expected account, then opens
-it. `manual` means it displays the same information and waits for the human to
-open it in the correct profile.
+- Expected browser/profile: <safe label or "single default profile">
 
 ## Local materializations
 
-| Purpose | Durable secret | Local destination | File mode | Validation |
+| Purpose | Durable secret | Local destination | Mode | Validation |
 | --- | --- | --- | --- | --- |
-| <consumer> | <Secret Manager name> | <safe path or Keychain service/account> | <mode or n/a> | <safe probe> |
+| <consumer> | <secret name> | <safe path or Keychain identity> | <mode or n/a> | <safe probe> |
 
 ## Explicit exceptions
 
-| Credential | Why it is not copied to Secret Manager | Recovery path |
+| Credential | Reason | Recovery path |
 | --- | --- | --- |
-| Human passwords and MFA recovery | Human root of trust; no agent integration | Human password manager and provider recovery |
-| <non-exportable session, if any> | <provider or repository constraint> | <fresh login or other safe recovery> |
+| Human root of trust | No agent integration | Password manager and provider recovery |
+| <non-exportable credential> | <constraint> | <fresh login or safe recovery> |
 
 ## Open setup items
 
-- <Only unresolved configuration or safe blocker metadata.>
+- <Safe blocker metadata only.>
 ```
 
-Never put a secret payload, recovery code, private key, token, password, or
-value-bearing command in this file.
+Store machine and server inventory in the workspace map. Never put a payload,
+recovery code, private key, token, password, or value-bearing command here.

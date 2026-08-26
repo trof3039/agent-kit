@@ -1,52 +1,36 @@
 ---
 name: credentials
-description: Manage, retrieve, save, rotate, recover, audit, or provision credentials. Use whenever work touches passwords, API keys, tokens, SSH keys, provider authentication, secret stores, or credential setup.
+description: Manage, recover, audit, or provision passwords, tokens, API keys, SSH keys, provider authentication, and secret stores.
 ---
 
 # Credentials
 
-Keep exportable machine credentials durably recoverable in Google Secret
-Manager, materialize only the local copies their consumers need, and make human
-setup resumable.
+Keep exportable machine authority recoverable without exposing its values.
 
-## Route the work
+## Route
 
-1. Read `docs/agents/credentials.md` when it exists, then read the repository's
-   narrower credential policy and existing tooling. Repository-specific
-   ownership, schemas, and authorization boundaries override workspace
-   defaults, but an exception to the durable-store policy must state why.
-2. For listing, retrieving, saving, changing, rotating, or auditing credentials,
-   read [storage and operations](references/storage-and-operations.md).
-3. When a human must obtain, recover, or enter credentials, especially across
-   several providers, read [terminal wizard UX](references/terminal-wizard.md).
-4. Establish the authorized scope. Metadata inspection is read-only; creating,
-   rotating, revoking, or deleting external authority still requires that work
-   to be within the user's request.
+1. Read `docs/agents/credentials.md` when present, then the owning repository's
+   credential policy and tooling. They define names, projects, identities,
+   materializations, browser behavior, and narrower authorization boundaries.
+2. Read [storage and operations](references/storage-and-operations.md) for
+   inventory, access, storage, rotation, recovery, or audit work.
+3. Read [terminal wizard UX](references/terminal-wizard.md) only when a human
+   must authenticate, navigate a provider, or enter a value.
+4. Confirm that external mutations are inside the user's requested scope.
 
 ## Invariants
 
-- Google Secret Manager is the durable store for every exportable non-human
-  secret by default. Local `.env` files, Keychain items, provider CLI configs,
-  and SSH files are operational copies, not the only recoverable copy.
+- Google Secret Manager is the durable source for each exportable machine
+  secret. Local files, Keychain, CLI stores, mounted files, and CI secrets are
+  replaceable materializations. Record every exception and its recovery path.
 - Human passwords, MFA recovery, payment authority, and broad account recovery
-  remain in the human-controlled password manager. Never integrate with it or
-  copy those values into Secret Manager.
-- Secret entry happens in a provider UI or hidden terminal prompt. Keep values
-  out of chat, tool output, shell history, command arguments, logs, screenshots,
-  tracked files, and non-secret inventories.
-- Follow the workspace's browser-opening policy. Always show the URL and
-  expected account first; open it automatically only when the workspace
-  explicitly permits that and the account/profile is unambiguous.
-- Keep one canonical owner, identifier, and store for each credential. Treat a
-  local materialization as an operational copy, not an accidental second
-  policy.
-- Back up an exportable SSH private key to its designated Secret Manager secret
-  before production access depends on that key as the only working path.
-- List and report names, locations, versions, timestamps, scopes, and validation
-  state without reading or printing payloads.
-- Validate a new or recovered credential immediately through the narrowest real
-  authenticated probe. Report only pass/fail and safe metadata.
-- Add or validate replacement access before removing old access. Revocation and
-  destruction are separate, explicit completion steps.
-- Finish with a safe inventory of what was validated, skipped, or remains
-  blocked; never include credential values.
+  remain in the human-controlled password manager with no agent integration.
+- Values enter through a provider UI or hidden terminal prompt and travel by
+  stdin or a protected file. Keep them out of chat, output, arguments, logs,
+  screenshots, tracked files, and non-secret inventories.
+- Give each credential one owner, stable name, and canonical project. Use
+  versions for changes; use separate projects when reader boundaries differ.
+- Inspect and report metadata only. Validate authority with the narrowest real
+  probe and report safe status.
+- Validate replacement access before revocation. Disablement, destruction, and
+  deletion are separate explicit acts.
