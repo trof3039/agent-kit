@@ -24,7 +24,7 @@ do not leave placeholder headings in the completed profile.
 
 | Subject | Canonical system | Access route | Precedence notes |
 | --- | --- | --- | --- |
-| <subject> | <system> | <tool or non-secret path> | <how conflicts are resolved> |
+| <subject> | <system> | <tool or path> | <how conflicts are resolved> |
 
 ## Artifact contracts
 
@@ -54,9 +54,9 @@ do not leave placeholder headings in the completed profile.
 
 ## Integrations
 
-| Integration | Purpose | Access method | Safe validation state |
+| Integration | Purpose | Access method | Validation state |
 | --- | --- | --- | --- |
-| <service> | <why it is used> | <tool and account label, never a secret> | <validated, blocked, or not configured> |
+| <service> | <why it is used> | <tool and account label> | <validated, blocked, or not configured> |
 
 ## Open setup items
 
@@ -65,5 +65,4 @@ do not leave placeholder headings in the completed profile.
 
 This file owns factual workspace topology and workflow mapping. Behavioral
 instructions belong in `AGENTS.md`; domain definitions belong in `CONTEXT.md`;
-decision rationale belongs in qualifying ADRs; secret values belong nowhere in
-the repository.
+decision rationale belongs in qualifying ADRs.

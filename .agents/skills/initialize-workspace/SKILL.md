@@ -19,7 +19,7 @@ again in the same task. Do not reproduce that skill's setup flow.
 
 Read the root instructions, Matt's generated `docs/agents/` configuration, and
 any partial initialization output. Inspect Git state, remotes, child
-repositories, source systems, integrations, safe authentication metadata, and
+repositories, source systems, integrations, authentication configuration, and
 existing repository-, team-, or user-provided workflow skills. Read available
 skills instead of asking the user to summarize them; record unavailable sources
 as blockers.
@@ -31,10 +31,9 @@ Before the first question, explain where settled information will go:
   [the workspace profile](references/workspace-profile.md);
 - domain language and qualifying decisions: the locations configured by Matt's
   setup and maintained through `domain-modeling`;
-- credential policy and safe metadata: `docs/agents/credentials.md` using the
+- credential operating profile: `docs/agents/credentials.md` using the
   [credential configuration format](../credentials/references/credential-config.md);
-- specs and tickets: the configured tracker;
-- secret values: never in chat or Git.
+- specs and tickets: the configured tracker.
 
 Tell the user that settled context is written during the interview, not saved
 as a transcript afterward.
@@ -67,9 +66,8 @@ Resolve only these workspace-specific branches:
 6. Repository-specific branch, commit, pull-request, merge, and worktree
    conventions.
 7. Credential bootstrap and access for every required integration. Invoke
-   `credentials`; establish the human root of trust, durable machine-secret
-   store, local materializations, safe validation, browser mode, and recovery
-   route before declaring an integration ready.
+   `credentials` and finish its operating profile before declaring an
+   integration ready.
 8. Language and communication conventions for each audience.
 
 ## Persist
@@ -94,14 +92,14 @@ from that frontier on the next invocation.
 
 Finish only when:
 
-- the workspace and credential profiles contain no secret values or unresolved
-  decisions hidden as assumptions;
+- the workspace and credential profiles contain no unresolved decisions hidden
+  as assumptions;
 - every relevant existing workflow skill is classified rather than silently
   trusted;
 - the credential bootstrap is usable, and each required local materialization
   has a durable source or an explicit recoverable exception;
 - child repositories and instruction ownership are unambiguous;
-- integrations are validated or listed as safe blockers;
+- integrations are validated or listed as blockers;
 - instructions have no duplicate owners or contradictions;
 - the user confirms the final summary and diff.
 

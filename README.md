@@ -17,8 +17,8 @@ instructions.
 - The complete stable engineering and productivity skill set from
   [Matt Pocock's skills](https://github.com/mattpocock/skills), vendored at a
   known upstream commit.
-- A `credentials` skill that makes safe, resumable authentication a required
-  part of workspace initialization and later credential work.
+- The personal `credentials` skill, linked from the neighboring `skills`
+  repository, for resumable authentication and credential operations.
 - An `initialize-workspace` skill that adds operator, repository, workflow,
   existing-instruction, and credential context after Matt's setup configures
   the engineering skills.
@@ -29,8 +29,8 @@ special-purpose, unstable, or non-functional.
 
 ## First use
 
-1. Clone this repository onto the target Mac.
-2. Open this folder as a local project in ChatGPT Desktop and trust the project.
+1. Clone `agent-kit` and `skills` beside each other in an `agents` directory.
+2. Open `agent-kit` as a local project in ChatGPT Desktop and trust the project.
 3. From a local terminal, create the personal credential vault:
 
    ```bash
@@ -53,14 +53,13 @@ Initialization explains the storage model before asking the first question:
 - `AGENTS.md` contains durable operating instructions.
 - `docs/agents/workspace.md` maps responsibilities, repositories, sources of
   truth, recurring workflows, and non-secret integration facts.
-- `docs/agents/credentials.md` records the non-secret GCP Secret Manager,
+- `docs/agents/credentials.md` records the GCP Secret Manager,
   naming, browser-opening, local-materialization, and recovery policy.
 - `CONTEXT.md` is created lazily and contains only canonical domain language.
 - `docs/adr/` is created lazily for consequential, surprising, hard-to-reverse
   decisions that involved a real trade-off.
 - Specs and tickets live in the configured issue tracker, not in an invented
   local backlog.
-- Secrets never enter this repository.
 
 If either setup step is interrupted, invoke that skill again. Both resume from
 the files already written instead of discarding settled progress.
@@ -120,5 +119,6 @@ policy may still override these settings. See the official
 
 The vendored source and commit are recorded in
 `THIRD_PARTY_NOTICES.md`. Review upstream changes before replacing the local
-copies; `initialize-workspace` and `credentials` are separate local skills and
-must not be overwritten by an upstream update.
+copies. `initialize-workspace` is local to this repository, while `credentials`
+is maintained in the neighboring personal `skills` repository; neither is
+replaced by a vendored upstream update.
