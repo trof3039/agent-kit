@@ -1,12 +1,13 @@
 ---
 name: initialize-workspace
 description: Grill the operator to turn a configured agent repository into a durable working workspace.
+disable-model-invocation: true
 ---
 
 # Initialize Workspace
 
-Extend Matt's repository setup with the operator, repository, workflow, and
-credential context it does not collect.
+Extend Matt's repository setup with the operator, repository, and workflow
+context it does not collect.
 
 ## Precondition
 
@@ -31,8 +32,6 @@ Before the first question, explain where settled information will go:
   [the workspace profile](references/workspace-profile.md);
 - domain language and qualifying decisions: the locations configured by Matt's
   setup and maintained through `domain-modeling`;
-- credential operating profile: `docs/agents/credentials.md` using the
-  [credential configuration format](../credentials/references/credential-config.md);
 - specs and tickets: the configured tracker.
 
 Tell the user that settled context is written during the interview, not saved
@@ -40,9 +39,9 @@ as a transcript afterward.
 
 ## Grill
 
-Use `grilling` and `domain-modeling`. Do not ask about technical ability or
-whether the agent may use Git, code, scripts, APIs, tests, or browsers; full
-capability is the baseline.
+Call the Skill tool twice, for "grilling" and "domain-modeling". Do not ask
+about technical ability or whether the agent may use Git, code, scripts, APIs,
+tests, or browsers; full capability is the baseline.
 
 First agree the finish line for this initialization. Configure enough context
 to run the first real workflow; defer unrelated, non-blocking branches to Open
@@ -65,9 +64,9 @@ Resolve only these workspace-specific branches:
    justify a script or skill without creating one outside the current scope.
 6. Repository-specific branch, commit, pull-request, merge, and worktree
    conventions.
-7. Credential bootstrap and access for every required integration. Invoke
-   `credentials` and finish its operating profile before declaring an
-   integration ready.
+7. The access route for every required integration: which tool and account
+   reaches it, and whether it is validated or still a blocker. Record routes
+   and accounts, never secret values.
 8. Language and communication conventions for each audience.
 
 ## Persist
@@ -75,7 +74,6 @@ Resolve only these workspace-specific branches:
 Write a decision as soon as it settles:
 
 - update `docs/agents/workspace.md` from the profile format;
-- create `docs/agents/credentials.md` from the credential format;
 - add exact child-repository paths to the parent `.gitignore`;
 - add only behavior-changing rules and context pointers to `AGENTS.md`;
 - let `domain-modeling` update its own glossary and ADR locations.
@@ -92,14 +90,13 @@ from that frontier on the next invocation.
 
 Finish only when:
 
-- the workspace and credential profiles contain no unresolved decisions hidden
-  as assumptions;
+- the workspace profile contains no unresolved decisions hidden as
+  assumptions;
 - every relevant existing workflow skill is classified rather than silently
   trusted;
-- the credential bootstrap is usable, and each required local materialization
-  has a durable source or an explicit recoverable exception;
 - child repositories and instruction ownership are unambiguous;
-- integrations are validated or listed as blockers;
+- every integration is validated or listed as a blocker with its access route
+  named;
 - instructions have no duplicate owners or contradictions;
 - the user confirms the final summary and diff.
 

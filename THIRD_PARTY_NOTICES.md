@@ -13,5 +13,6 @@ skill sets under `.agents/skills/`. Files under upstream `in-progress`, `misc`,
 and deprecated directories are excluded because they are not part of the
 published stable set.
 
-The local `initialize-workspace` and `credentials` skills are not part of the
-Matt Pocock source distribution.
+The local `initialize-workspace` skill is not part of the Matt Pocock source
+distribution. It is the only skill in `.agents/skills/` that upstream does not
+own, and the repository vendors no other third-party material.

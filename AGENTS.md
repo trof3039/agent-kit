@@ -6,10 +6,14 @@ workflow records actual workspace facts.
 
 ## First-time initialization
 
-- Before `$initialize-workspace`, run `$setup-matt-pocock-skills` when its
-  `docs/agents/issue-tracker.md`, `domain.md`, or applicable `triage-labels.md`
-  output is missing.
-- When the Workspace profile says `not initialized`, run
+Both setup skills are user-invoked: no skill and no agent can reach them. Ask
+the user to run the missing one and wait, rather than substituting your own
+setup flow.
+
+- When `docs/agents/issue-tracker.md`, `domain.md`, or the applicable
+  `triage-labels.md` is missing, tell the user to run
+  `$setup-matt-pocock-skills` first.
+- When the Workspace profile says `not initialized`, tell the user to run
   `$initialize-workspace` before the first substantive task.
 - Resume partial initialization from the files already written. Do not restart
   the interview or discard settled decisions.
@@ -65,11 +69,16 @@ workflow records actual workspace facts.
 - Work discovered outside the current request belongs in the configured issue
   tracker rather than an invented backlog directory.
 
-## Credentials
+## Access and secrets
 
-- Read and follow `.agents/skills/credentials/SKILL.md` for credential work.
-- After initialization, `docs/agents/credentials.md` owns this workspace's
-  store, account, naming, materialization, browser, and recovery configuration.
+- The Integrations table in `docs/agents/workspace.md` owns how each system is
+  reached and under which account. Record the route there; never record a
+  secret value in it or in any other tracked file.
+- When capturing a value needs a human, use `wizard`. It writes what it
+  captures into a gitignored `.env` rather than into the conversation.
+- This workspace mandates no secret store. Follow one only after initialization
+  records it as a convention, and follow a child repository's own credential
+  policy for files inside that child.
 
 ## Workspace profile
 

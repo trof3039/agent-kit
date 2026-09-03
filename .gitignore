@@ -1,7 +1,6 @@
 .DS_Store
 .env
 .env.*
-!.env.example
 .worktrees/
 
 # Initialization adds exact paths for independent child repositories below.
